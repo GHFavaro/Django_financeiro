@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portifólio de Guilherme Favaro</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+</head>
+<body>
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Cliente</th>
+            <th scope="col">Dívida</th>
+            <th scope="col">Descrição</th>
+          </tr>
+        </thead>
+        <tbody>
+            <form method="post">
+            {% csrf_token %}
+            {% for devedor in devedores %}
+            <tr>
+                <th scope="row">{{ devedor.id }}</th>
+                <td>{{ devedor.cliente }}</td>
+                <td>R${{ devedor.divida }}</td>
+                <td>{{ devedor.descricao }}</td>
+                <td><button class="btn btn-success" value="{{ devedor.id }}" name="pago">Pago</button></td>
+            </tr>
+            {% endfor %} 
+            </form>
+        </tbody>
+      </table>
+</body>
+</html>

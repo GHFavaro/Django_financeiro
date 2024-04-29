@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar devedor</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label>Nome do devedor</label>
+            <input type="text" class="form-control" placeholder="nome do devedor" name="nome">
+            <br>
+          </div>
+          <div class="form-group">
+            <label>Valor da dívida</label>
+            <input type="number" class="form-control" placeholder="valor" name="valor">
+          </div>
+          <br>
+          <div class="form-group">
+            <label>Descrição da dívida</label>
+            <input type="text" class="form-control" placeholder="Descrição" name="descricao">
+          </div>
+          <br>
+          <button type="submit" class="btn btn-primary">Cadastrar dívida</button>
+          <br>
+          <p>{{ sucesso }}</p>
+    </form>
+</body>
+</html>
