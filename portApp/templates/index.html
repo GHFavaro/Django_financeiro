@@ -16,6 +16,7 @@
             <th scope="col">Cliente</th>
             <th scope="col">Dívida</th>
             <th scope="col">Descrição</th>
+            <th scope="col">Data do pagamento</th>
           </tr>
         </thead>
         <tbody>
@@ -27,7 +28,11 @@
                 <td>{{ devedor.cliente }}</td>
                 <td>R${{ devedor.divida }}</td>
                 <td>{{ devedor.descricao }}</td>
-                <td><button class="btn btn-success" value="{{ devedor.id }}" name="pago">Pago</button></td>
+                {% if devedor.pagou == True %}
+                  <td>{{ devedor.data_pagamento }}</td>
+                {% else %}
+                  <td><button class="btn btn-success" value="{{ devedor.id }}" name="pago">Pago</button></td>
+                {% endif %}
             </tr>
             {% endfor %} 
             </form>
