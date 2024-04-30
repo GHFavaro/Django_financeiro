@@ -15,8 +15,14 @@ class IndexView(TemplateView):
     
     def post(self, request):
         pagou = request.POST.get('pago')
+        n_pagou = request.POST.get('nao pagou')
         if pagou:
-            devedor_pagou = Devedores.objects.filter(id=pagou).update(pagou=True, data_pagamento=datetime.date.today())
+            dev = Devedores.objects.filter(id=pagou).update(pagou=True, data_modificacao=datetime.date.today())
+            devedores = Devedores.objects.all()
+            context = {'devedores': devedores}
+            return render(request, "index.html", context)
+        if n_pagou:
+            dev = Devedores.objects.filter(id=n_pagou).update(pagou=False, data_modificacao=datetime.date.today())
             devedores = Devedores.objects.all()
             context = {'devedores': devedores}
             return render(request, "index.html", context)

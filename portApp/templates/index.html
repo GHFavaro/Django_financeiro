@@ -29,7 +29,8 @@
                 <td>R${{ devedor.divida }}</td>
                 <td>{{ devedor.descricao }}</td>
                 {% if devedor.pagou == True %}
-                  <td>{{ devedor.data_pagamento }}</td>
+                  <td>{{ devedor.data_modificacao }}</td>
+                  <td><button class="btn btn-danger" value="{{ devedor.id }}" name="nao pagou">Não pagou</button></td>
                 {% else %}
                   <td><button class="btn btn-success" value="{{ devedor.id }}" name="pago">Pago</button></td>
                 {% endif %}

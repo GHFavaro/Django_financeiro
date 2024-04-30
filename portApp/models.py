@@ -7,4 +7,4 @@ class Devedores(models.Model):
     divida = models.FloatField()
     descricao = models.TextField()
     pagou = models.BooleanField(default=False)
-    data_pagamento = models.DateField(null=True)
+    data_modificacao = models.DateField(null=True)
