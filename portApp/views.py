@@ -16,6 +16,20 @@ class IndexView(TemplateView):
     def post(self, request):
         pagou = request.POST.get('pago')
         n_pagou = request.POST.get('nao pagou')
+        filtro = request.POST.get('filtro')
+        if filtro:
+            if filtro == 'n_pagos':
+                dev = Devedores.objects.filter(pagou=False).all()
+                context = {'devedores': dev}
+                return render(request, "index.html", context)
+            elif filtro == 'pagos':
+                dev = Devedores.objects.filter(pagou=True).all()
+                context = {'devedores': dev}
+                return render(request, "index.html", context)
+            elif filtro == 'todos':
+                dev = Devedores.objects.all()
+                context = {'devedores': dev}
+                return render(request, "index.html", context)
         if pagou:
             dev = Devedores.objects.filter(id=pagou).update(pagou=True, data_modificacao=datetime.date.today())
             devedores = Devedores.objects.all()
@@ -32,13 +46,17 @@ class CadastrarView(TemplateView):
 
     def post(self, request):
         nome = str(request.POST.get('nome'))
-        descricao = str(request.POST.get('descricao'))
+        descricao = str(request.POST.get('divida'))
         valor = float(request.POST.get('valor'))
 
         if nome and descricao and valor:
-            novo_devedor = Devedores(cliente=nome, divida=valor, descricao=descricao)
-            novo_devedor.save()
-            context = {'sucesso': 'devedor cadastrado com sucesso'}
+            if valor >= 1:
+                novo_devedor = Devedores(cliente=nome, divida=valor, descricao=descricao)
+                novo_devedor.save()
+                context = {'sucesso': 'devedor cadastrado com sucesso'}
+                return render(request, "cadastrar.html", context)
+            else:
+                context = {'sucesso': 'A dívida não pode ser negativa ou igual a zero'}
             return render(request, "cadastrar.html", context)
         else:
             context = {'sucesso': 'Preencha todos os campos'}

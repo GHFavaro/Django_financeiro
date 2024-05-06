@@ -8,8 +8,19 @@
     {% bootstrap_css %}
     {% bootstrap_javascript %}
 </head>
-<body>
-    <table class="table table-striped">
+<body style="background-color: #bbbbbb;">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <form class="d-flex" method="post">
+      {% csrf_token %}
+      <select class="form-control" id="descricao_divida" name="filtro" style="width: 350px;">
+        <option value="todos">Todos os pedidos</option>
+        <option value="n_pagos">Não pagos</option>
+        <option value="pagos">Pagos</option>
+      </select>
+        <button class="btn btn-success" type="submit">Filtrar</button>
+    </form>
+  </nav>
+    <table class="table table-striped" style="background-color: #fff;">
         <thead>
           <tr>
             <th scope="col">#</th>
