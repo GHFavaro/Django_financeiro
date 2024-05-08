@@ -41,9 +41,9 @@
                 <td>{{ devedor.descricao }}</td>
                 {% if devedor.pagou == True %}
                   <td>{{ devedor.data_modificacao }}</td>
-                  <td><button class="btn btn-danger" value="{{ devedor.id }}" name="nao pagou">Não pagou</button></td>
+                  <td><button class="btn btn-success" value="{{ devedor.id }}" name="nao pagou">Pago</button></td>
                 {% else %}
-                  <td><button class="btn btn-success" value="{{ devedor.id }}" name="pago">Pago</button></td>
+                  <td><button class="btn btn-danger" value="{{ devedor.id }}" name="pago">À receber</button></td>
                 {% endif %}
             </tr>
             {% endfor %} 
